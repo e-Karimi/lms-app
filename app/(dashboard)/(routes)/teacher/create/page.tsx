@@ -15,7 +15,7 @@ const formSchema = z.object({
   title: z.string().min(1, { message: "Title is required" }),
 });
 
-const CreateCoursePage = () => {
+export default function CreateCoursePage() {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -31,8 +31,9 @@ const CreateCoursePage = () => {
     console.log("onSubmit ~ values:", values);
 
     try {
-      const response = await axios.post("/api/course", values);
+      const response = await axios.post("/api/courses", values);
       router.push(`/teacher/courses/${response.data.id}`);
+      toast.success("Course created successfully");
     } catch (error) {
       console.log("onSubmit ~ error:", error);
       toast.error("Something went wrong");
@@ -75,6 +76,4 @@ const CreateCoursePage = () => {
       </div>
     </div>
   );
-};
-
-export default CreateCoursePage;
+}
