@@ -2,8 +2,9 @@ import React from "react";
 import db from "@/data/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import IconBadge from '@/components/icon-badge'
+import IconBadge from "@/components/icon-badge";
 import { LayoutDashboard } from "lucide-react";
+import TitleForm from "@/components/forms/title-form";
 
 export default async function CourseIdPage({ params }: { params: { courseId: string } }) {
   const { userId } = await auth();
@@ -21,9 +22,10 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
   if (!course) {
     redirect("/");
   }
-  const { title, description, imageUrl, price, categoryId } = course;
-  const requiredFields = [title, description, imageUrl, price, categoryId];
 
+  const { id, title, description, imageUrl, price, categoryId } = course;
+
+  const requiredFields = [title, description, imageUrl, price, categoryId];
   const totalFeilds = requiredFields.length;
   const completedFeilds = requiredFields.filter(Boolean).length;
   const completionFeilds = `(${completedFeilds}/${totalFeilds})`;
@@ -39,11 +41,10 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
       <div className="grid drid-cols-1 md:grid-cols-2 gap-6 mt-16">
         <div>
           <div className="flex items-center gap-x-2">
-            <IconBadge icon={LayoutDashboard}/>
-            <h2 className="text-xl">
-              Customize your course
-            </h2>
+            <IconBadge icon={LayoutDashboard} />
+            <h2 className="text-xl">Customize your course</h2>
           </div>
+          <TitleForm title={title} courseId={id} />
         </div>
       </div>
     </div>
