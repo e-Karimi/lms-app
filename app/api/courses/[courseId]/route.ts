@@ -6,6 +6,7 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
   try {
     const { userId } = await auth();
     const values = await req.json();
+    console.log("PATCH ~ values:", values);
 
     if (!userId) {
       return NextResponse.json("Unathorized", { status: 401 });
@@ -21,7 +22,7 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
       },
     });
 
-    return NextResponse.json("Title updated successfully");
+    return NextResponse.json("Course updated successfully");
   } catch (error) {
     console.log("[courseId]-> PATCH:", error);
     return NextResponse.json("Internal Server Error", { status: 500 });

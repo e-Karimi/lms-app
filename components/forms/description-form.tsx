@@ -6,29 +6,37 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Pencil } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-interface TitleFormProps {
+interface descriptionFormProps {
   courseId: string;
-  title: string;
+  description: string | null;
 }
 
 const formSchema = z.object({
-  title: z.string().min(1, { message: "Title is required" }),
+  description: z
+    .string()
+    .min(20, {
+      message: "description must be at least 20 characters.",
+    })
+    .max(160, {
+      message: "description must not be longer than 160 characters.",
+    }),
 });
 
-export default function TitleForm({ courseId, title }: TitleFormProps) {
+export default function DescriptionForm({ courseId, description }: descriptionFormProps) {
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title,
+      description: description || "",
     },
   });
 
@@ -37,11 +45,11 @@ export default function TitleForm({ courseId, title }: TitleFormProps) {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("title updated successfully");
+      toast.success("description updated successfully");
       setIsEditing(false);
       router.refresh();
     } catch (error) {
-      console.log("[TitleForm]=> error:", error);
+      console.log("[descriptionForm]=> error:", error);
       toast.error("Something went wrong");
     }
   };
@@ -49,32 +57,34 @@ export default function TitleForm({ courseId, title }: TitleFormProps) {
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="flex items-center justify-between font-medium mb-2">
-        <span>Course title</span>
+        <span>Course description</span>
         <Button variant="ghost" onClick={() => setIsEditing((prev) => !prev)}>
           {isEditing ? (
             <>Cancel</>
           ) : (
             <>
               <Pencil className="w-4 h-4 " />
-              Edit title
+              Edit description
             </>
           )}
         </Button>
       </div>
       <div>
         {!isEditing ? (
-          <p className="text-sm ">{title}</p>
+          <p className={cn("text-sm mt-2", !description && "text-slate-500 italic")}>
+            {description || "No description"}
+          </p>
         ) : (
           <>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 mt-2">
                 <FormField
                   control={form.control}
-                  name="title"
+                  name="description"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input {...field} disabled={isSubmitting} placeholder="e.g. 'Advanced web development" />
+                        <Textarea {...field} disabled={isSubmitting} placeholder="e.g. 'This course is about...' " />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
