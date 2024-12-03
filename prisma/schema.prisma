@@ -24,12 +24,9 @@ model Course {
   imageUrl String? @db.Text
   price Float?
   isPublished Boolean @default(false)
-
   category Category? @relation(fields: [categoryId],references: [id])
   categoryId String?
-
   attachments Attachment[]
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -40,10 +37,8 @@ model Attachment{
   id String @id @default(uuid())
   name String
   url String @db.Text
-
   course Course  @relation(fields: [courseId],references: [id],onDelete: Cascade) 
   courseId String
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

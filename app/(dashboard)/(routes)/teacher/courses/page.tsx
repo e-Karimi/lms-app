@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const CoursesPage = () => {
+export default function CoursesPage() {
   return (
     <div className="p-6">
       <Button asChild size="sm" variant="secondary">
@@ -9,6 +9,4 @@ const CoursesPage = () => {
       </Button>
     </div>
   );
-};
-
-export default CoursesPage;
+}
