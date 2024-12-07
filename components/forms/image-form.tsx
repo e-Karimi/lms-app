@@ -28,12 +28,12 @@ export default function ImageForm({ courseId, imageUrl }: ImageFormProps) {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("description updated successfully");
+      toast.success("image updated successfully");
 
       setIsEditing(false);
       router.refresh();
     } catch (error) {
-      console.log("[descriptionForm]=> error:", error);
+      console.log("[ImageForm]=> error:", error);
       toast.error("Something went wrong");
     }
   };
@@ -65,7 +65,7 @@ export default function ImageForm({ courseId, imageUrl }: ImageFormProps) {
           </div>
         )}
         {imageUrl && !isEditing && (
-          <div className="relative h-60 aspect-video mt-2">
+          <div className="relative h-60  w-full aspect-video mt-2">
             <Image src={imageUrl} fill priority className="object-cover rounded-md" alt="apload Course Image" />
           </div>
         )}

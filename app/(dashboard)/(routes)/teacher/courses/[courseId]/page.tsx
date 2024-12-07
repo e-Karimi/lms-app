@@ -7,6 +7,7 @@ import { LayoutDashboard } from "lucide-react";
 import TitleForm from "@/components/forms/title-form";
 import DescriptionForm from "@/components/forms/description-form";
 import ImageForm from "@/components/forms/image-form";
+import CategoryForm from "@/components/forms/category-form";
 
 export default async function CourseIdPage({ params }: { params: { courseId: string } }) {
   const { userId } = await auth();
@@ -32,6 +33,14 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
   const completedFeilds = requiredFields.filter(Boolean).length;
   const completionFeilds = `(${completedFeilds}/${totalFeilds})`;
 
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
+
+  const categoriesOptions = categories.map((category) => ({ label: category.name, value: category.id }));
+
   return (
     <div className="p-6">
       <div className="flex items-center justify-between">
@@ -48,7 +57,8 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
           </div>
           <TitleForm title={title} courseId={id} />
           <DescriptionForm description={description} courseId={id} />
-          <ImageForm imageUrl={imageUrl} courseId={id}/>
+          <ImageForm imageUrl={imageUrl} courseId={id} />
+          <CategoryForm options={categoriesOptions} categoryId={categoryId} courseId={id} />
         </div>
       </div>
     </div>
