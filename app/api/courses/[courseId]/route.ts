@@ -6,13 +6,12 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
   try {
     const { userId } = await auth();
     const values = await req.json();
-    console.log("PATCH ~ values:", values);
 
     if (!userId) {
       return NextResponse.json("Unathorized", { status: 401 });
     }
 
-    await db.course.update({
+    const course = await db.course.update({
       where: {
         id: params.courseId,
         userId,
@@ -22,7 +21,7 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
       },
     });
 
-    return NextResponse.json("Course updated successfully");
+    return NextResponse.json(course);
   } catch (error) {
     console.log("[courseId]-> PATCH:", error);
     return NextResponse.json("Internal Server Error", { status: 500 });

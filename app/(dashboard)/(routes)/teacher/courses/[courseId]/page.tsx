@@ -6,6 +6,7 @@ import IconBadge from "@/components/icon-badge";
 import { LayoutDashboard } from "lucide-react";
 import TitleForm from "@/components/forms/title-form";
 import DescriptionForm from "@/components/forms/description-form";
+import ImageForm from "@/components/forms/image-form";
 
 export default async function CourseIdPage({ params }: { params: { courseId: string } }) {
   const { userId } = await auth();
@@ -47,6 +48,7 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
           </div>
           <TitleForm title={title} courseId={id} />
           <DescriptionForm description={description} courseId={id} />
+          <ImageForm imageUrl={imageUrl} courseId={id}/>
         </div>
       </div>
     </div>

@@ -30,6 +30,7 @@ const formSchema = z.object({
 });
 
 export default function DescriptionForm({ courseId, description }: descriptionFormProps) {
+  console.log("DescriptionForm ~ description:", description);
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
@@ -90,7 +91,7 @@ export default function DescriptionForm({ courseId, description }: descriptionFo
                     </FormItem>
                   )}
                 />
-                <Button type="submit" disabled={isSubmitting || !isValid} className="tracking-wide">
+                <Button type="submit" disabled={isSubmitting || !isValid} className="tracking-wide  font-normal">
                   save
                 </Button>
               </form>

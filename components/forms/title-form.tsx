@@ -80,7 +80,7 @@ export default function TitleForm({ courseId, title }: TitleFormProps) {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" disabled={isSubmitting || !isValid} className="tracking-wide">
+                <Button type="submit" disabled={isSubmitting || !isValid} className="tracking-wide font-normal ">
                   save
                 </Button>
               </form>
