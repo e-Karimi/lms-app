@@ -6,37 +6,31 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Pencil } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { formatPrice } from "@/lib/format";
 
-interface DescriptionFormProps {
+interface PriceFormProps {
   courseId: string;
-  description: string | null;
+  price: number | null;
 }
 
 const formSchema = z.object({
-  description: z
-    .string()
-    .min(20, {
-      message: "description must be at least 20 characters.",
-    })
-    .max(160, {
-      message: "description must not be longer than 160 characters.",
-    }),
+  price: z.coerce.number(),
 });
 
-export default function DescriptionForm({ courseId, description }: DescriptionFormProps) {
+export default function PriceForm({ courseId, price }: PriceFormProps) {
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: description || "",
+      price: price || 0,
     },
   });
 
@@ -45,11 +39,11 @@ export default function DescriptionForm({ courseId, description }: DescriptionFo
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("description updated successfully");
+      toast.success("price updated successfully");
       setIsEditing(false);
       router.refresh();
     } catch (error) {
-      console.log("[descriptionForm]=> error:", error);
+      console.log("[PriceForm]=> error:", error);
       toast.error("Something went wrong");
     }
   };
@@ -57,22 +51,22 @@ export default function DescriptionForm({ courseId, description }: DescriptionFo
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="flex items-center justify-between font-medium mb-2">
-        <span>Course description</span>
+        <span>Course price</span>
         <Button variant="ghost" onClick={() => setIsEditing((prev) => !prev)}>
           {isEditing ? (
             <>Cancel</>
           ) : (
             <>
               <Pencil className="w-4 h-4 " />
-              Edit description
+              Edit price
             </>
           )}
         </Button>
       </div>
       <div>
         {!isEditing ? (
-          <p className={cn("text-sm mt-2", !description && "text-slate-500 italic")}>
-            {description || "No description"}
+          <p className={cn("text-sm mt-2", !price && "text-slate-500 italic")}>
+            {price ? formatPrice(price) : "No price"}
           </p>
         ) : (
           <>
@@ -80,11 +74,17 @@ export default function DescriptionForm({ courseId, description }: DescriptionFo
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 mt-2">
                 <FormField
                   control={form.control}
-                  name="description"
+                  name="price"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Textarea {...field} disabled={isSubmitting} placeholder="e.g. 'This course is about...' " />
+                        <Input
+                          {...field}
+                          type="number"
+                          step="0.01"
+                          disabled={isSubmitting}
+                          placeholder="Set a price for your course"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
