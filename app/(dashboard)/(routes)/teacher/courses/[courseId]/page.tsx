@@ -50,7 +50,7 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
 
   const categoriesOptions = categories.map((category) => ({ label: category.name, value: category.id }));
 
-  const courseAttachments = attachments.map((attachment) => ({
+  const attachmentData = attachments.map((attachment) => ({
     id: attachment.id,
     name: attachment.name,
     url: attachment.url,
@@ -95,7 +95,7 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
               <IconBadge icon={File} />
               <h2 className="text-xl"> Resorcess & Attachments</h2>
             </div>
-            <AttachmentForm attachments={courseAttachments} courseId={id} />
+            <AttachmentForm attachments={attachmentData} courseId={id} />
           </div>
         </div>
       </div>

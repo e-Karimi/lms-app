@@ -66,7 +66,14 @@ export default function ImageForm({ courseId, imageUrl }: ImageFormProps) {
         )}
         {imageUrl && !isEditing && (
           <div className="relative h-60  w-full aspect-video mt-2">
-            <Image src={imageUrl} fill sizes="100vw" priority className="object-cover rounded-md" alt="apload Course Image"  />
+            <Image
+              src={imageUrl}
+              fill
+              sizes="40vw"
+              priority
+              className="object-cover rounded-md"
+              alt="apload Course Image"
+            />
           </div>
         )}
 
@@ -76,7 +83,7 @@ export default function ImageForm({ courseId, imageUrl }: ImageFormProps) {
               endpoint="courseImage"
               onChange={(url) => {
                 if (url) {
-                onSubmit({ imageUrl: url});
+                  onSubmit({ imageUrl: url });
                 }
               }}
             />
