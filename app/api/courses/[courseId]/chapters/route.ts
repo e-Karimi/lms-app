@@ -1,11 +1,11 @@
 import db from "@/data/db";
-import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 export const POST = async (req: Request, { params }: { params: { courseId: string } }) => {
   try {
     const { userId } = await auth();
-    const { url } = await req.json();
+    const { title } = await req.json();
 
     if (!userId) {
       return NextResponse.json("Unauthorized", { status: 401 });
@@ -22,17 +22,28 @@ export const POST = async (req: Request, { params }: { params: { courseId: strin
       return NextResponse.json("Unauthorized", { status: 401 });
     }
 
-    const attachments = await db.attachment.create({
-      data: {
+    const lastChapter = await db.chapter.findFirst({
+      where: {
         courseId: params.courseId,
-        url,
-        name: url.split("/").pop(),
+      },
+      orderBy: {
+        position: "desc",
       },
     });
 
-    return NextResponse.json(attachments);
+    const newPosition = lastChapter ? lastChapter.position + 1 : 1;
+
+    const chapter = await db.chapter.create({
+      data: {
+        title,
+        courseId: params.courseId,
+        position: newPosition,
+      },
+    });
+
+    return NextResponse.json(chapter);
   } catch (error) {
-    console.log("[courseId/attachments]-> POST:", error);
+    console.log("[courseId/chapters]-> POST:", error);
     return NextResponse.json("Internal Server Error", { status: 500 });
   }
 };

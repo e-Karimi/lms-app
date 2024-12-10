@@ -10,7 +10,6 @@ import { File, Loader2, PlusCircle, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import FileUpload from "@/components/file-upload";
-
 interface AttachmentFormProps {
   courseId: string;
   attachments: {

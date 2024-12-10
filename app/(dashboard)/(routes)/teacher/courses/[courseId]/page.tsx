@@ -1,15 +1,17 @@
-import React from "react";
 import db from "@/data/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+
 import IconBadge from "@/components/icon-badge";
 import { CircleDollarSign, File, LayoutDashboard, ListCheck } from "lucide-react";
-import TitleForm from "@/components/forms/title-form";
-import DescriptionForm from "@/components/forms/description-form";
-import ImageForm from "@/components/forms/image-form";
-import CategoryForm from "@/components/forms/category-form";
-import PriceForm from "@/components/forms/price-form";
-import AttachmentForm from "@/components/forms/attachment-form";
+
+import TitleForm from "@/components/forms/course/title-form";
+import DescriptionForm from "@/components/forms/course/description-form";
+import ImageForm from "@/components/forms/course/image-form";
+import CategoryForm from "@/components/forms/course/category-form";
+import PriceForm from "@/components/forms/course/price-form";
+import AttachmentForm from "@/components/forms/course/attachment-form";
+import ChapterForm from "@/components/forms/course/chapter/chapter-form";
 
 export default async function CourseIdPage({ params }: { params: { courseId: string } }) {
   const { userId } = await auth();
@@ -21,11 +23,17 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
   const course = await db.course.findUnique({
     where: {
       id: params.courseId,
+      userId,
     },
     include: {
       attachments: {
         orderBy: {
           createdAt: "desc",
+        },
+      },
+      chapters: {
+        orderBy: {
+          position: "asc",
         },
       },
     },
@@ -35,12 +43,20 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
     redirect("/");
   }
 
-  const { id, title, description, imageUrl, price, categoryId, attachments } = course;
+  const { id, title, description, imageUrl, price, categoryId, attachments, chapters } = course;
 
-  const requiredFields = [title, description, imageUrl, price, categoryId];
+  const requiredFields = [
+    title,
+    description,
+    imageUrl,
+    price,
+    categoryId,
+    chapters.some((chapter) => chapter.isPublished),
+  ];
+
   const totalFeilds = requiredFields.length;
   const completedFeilds = requiredFields.filter(Boolean).length;
-  const completionFeilds = `(${completedFeilds}/${totalFeilds})`;
+  const completionText = `(${completedFeilds}/${totalFeilds})`;
 
   const categories = await db.category.findMany({
     orderBy: {
@@ -61,7 +77,7 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-2xl font-medium">Course setup</h1>
-          <span className="text-sm text-slate-700">Compelet all feilds {completionFeilds}</span>
+          <span className="text-sm text-slate-700">Compelet all feilds {completionText}</span>
         </div>
       </div>
       <div className="grid drid-cols-1 md:grid-cols-2 gap-6 mt-16">
@@ -81,7 +97,7 @@ export default async function CourseIdPage({ params }: { params: { courseId: str
               <IconBadge icon={ListCheck} />
               <h2 className="text-xl"> Course chapters</h2>
             </div>
-            <div className="">CHAPTER</div>
+            <ChapterForm chapters={chapters} courseId={id} />
           </div>
           <div>
             <div className="flex items-center gap-x-2">
