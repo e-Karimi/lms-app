@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import db from "@/data/db";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
@@ -12,7 +13,6 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
   try {
     const { userId } = await auth();
     const { courseId, chapterId } = params;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { isPublished, ...values } = await req.json();
 
     if (!userId) {
@@ -58,13 +58,13 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
         });
       }
     }
-    
+
     const asset = await mux.video.assets.create({
       input: values.videoUrl,
       test: false,
       playback_policy: ["public"],
     });
-    
+
     await db.muxData.create({
       data: {
         chapterId,
@@ -72,7 +72,6 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
         playbackId: asset.playback_ids?.[0]?.id,
       },
     });
-
 
     return NextResponse.json(chapter);
   } catch (error) {

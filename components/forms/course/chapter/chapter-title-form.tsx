@@ -37,7 +37,11 @@ export default function ChapterTitleForm({ courseId, chapterId, title }: Chapter
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
+      await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       toast.success("Chapter updated successfully");
       setIsEditing(false);
       router.refresh();

@@ -46,7 +46,7 @@ export default async function ChapterIdPage({ params }: { params: { courseId: st
   return (
     <>
       {!chapter.isPublished && (
-        <Banner label="This chapter is unpublished, It will not visible in the course" variant="warning" />
+        <Banner label="This chapter is unpublished, It will not be visible in the course" variant="warning" />
       )}
 
       <div className="p-6">
