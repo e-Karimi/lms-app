@@ -5,12 +5,12 @@ const prisma = new PrismaClient();
 async function main() {
   const category = await prisma.category.createMany({
     data: [
+      { name: "Backend" },
       { name: "Database" },
       { name: "Frontend" },
-      { name: "Backend" },
-      { name: "Security" },
-      { name: "Music" },
       { name: "Math" },
+      { name: "Music" },
+      { name: "Security" },
       { name: "Sport" },
     ],
   });
