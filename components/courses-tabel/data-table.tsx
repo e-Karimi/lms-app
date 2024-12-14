@@ -50,7 +50,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
           placeholder="Filter title..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) => table.getColumn("title")?.setFilterValue(event.target.value)}
-          className="max-w-sm rounded-sm"
+          className=" max-w-60 sm:max-w-sm rounded-sm "
         />
         <Button asChild size="sm" className="tracking-wider rounded-sm">
           <Link href="/teacher/create">

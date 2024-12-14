@@ -1,4 +1,4 @@
-import MobileSidebar from "@/components/layout/mobile-sidebar";
+import MobileSidebar from "@/components/dashboard-layout/mobile-sidebar";
 import NavbarRoutes from "@/components/navbar-routes";
 
 const Navbar = () => {

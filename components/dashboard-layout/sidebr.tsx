@@ -1,5 +1,5 @@
-import Logo from "@/components/layout/logo";
-import SidebarRoutes from "@/components/layout/sidebar-routes";
+import Logo from "@/components/dashboard-layout/logo";
+import SidebarRoutes from "@/components/dashboard-layout/sidebar-routes";
 
 const Sidebar = () => {
   return (
