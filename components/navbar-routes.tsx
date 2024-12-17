@@ -13,7 +13,7 @@ const NavbarRoutes = () => {
   const pathname = usePathname();
 
   const isTeacherPage = pathname?.startsWith("/teacher");
-  const isCoursePage = pathname?.startsWith("/courses");
+  const isCourseIdPage = pathname?.startsWith("/courses") && !pathname?.includes("/chapters");
   const isSearchPage = pathname == "/search";
 
   return (
@@ -25,7 +25,7 @@ const NavbarRoutes = () => {
       )}
       <div className=" w-full flex items-center justify-between">
         <div className="hidden md:flex gap-x-2 ">
-          {isCoursePage && (
+          {isCourseIdPage && (
             <Button asChild size="icon" variant="ghost" title="Back to search">
               <Link href="/search">
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -34,7 +34,7 @@ const NavbarRoutes = () => {
           )}
         </div>
         <div className="flex gap-x-2 ml-auto md:ml-0 ">
-          {isTeacherPage || isCoursePage ? (
+          {isTeacherPage || isCourseIdPage ? (
             <Button asChild size="sm" variant="ghost" title="Back to dashboard">
               <Link href="/">
                 <LogOut className="h-4 w-4 mr-2" />

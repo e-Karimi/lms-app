@@ -34,6 +34,7 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
         chapterId,
       },
     });
+    console.log("PATCH ~ muxData:", muxData);
 
 
     if (!chapter || !muxData || !chapter.title || !chapter.description || !chapter.videoUrl) {

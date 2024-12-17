@@ -57,21 +57,21 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
           },
         });
       }
+
+      const asset = await mux.video.assets.create({
+        input: values.videoUrl,
+        test: false,
+        playback_policy: ["public"],
+      });
+
+      await db.muxData.create({
+        data: {
+          chapterId,
+          assetId: asset.id,
+          playbackId: asset.playback_ids?.[0]?.id,
+        },
+      });
     }
-
-    const asset = await mux.video.assets.create({
-      input: values.videoUrl,
-      test: false,
-      playback_policy: ["public"],
-    });
-
-    await db.muxData.create({
-      data: {
-        chapterId,
-        assetId: asset.id,
-        playbackId: asset.playback_ids?.[0]?.id,
-      },
-    });
 
     return NextResponse.json(chapter);
   } catch (error) {

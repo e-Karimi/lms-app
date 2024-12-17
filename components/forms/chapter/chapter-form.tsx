@@ -9,14 +9,14 @@ import { useRouter } from "next/navigation";
 
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Input } from "../../../ui/input";
+import { Input } from "../../ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Loader2, PlusCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { Chapter } from "@prisma/client";
 
-import ChaptersList from "@/components/forms/course/chapter/chapters-list";
+import ChaptersList from "@/components/forms/chapter/chapters-list";
 
 interface ChapterFormProps {
   courseId: string;

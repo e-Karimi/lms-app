@@ -51,15 +51,8 @@ export const getCourses = async ({
     });
 
     const coursesWithProgress: CourseWithProgressWithCategory[] = await Promise.all(
-      //* set progress to null if course is not bought
+      //* set progress to all courses
       courses.map(async (course) => {
-        if (course.purchases.length === 0) {
-          return {
-            ...course,
-            progress: null,
-          };
-        }
-        //* set progress to perogressPercentage if course is buyed
         const perogressPercentage = await getProgress(userId, course.id);
 
         return {
@@ -75,3 +68,26 @@ export const getCourses = async ({
     return [];
   }
 };
+
+
+
+//**** */ When purchase functionality has been implemented
+
+// const coursesWithProgress: CourseWithProgressWithCategory[] = await Promise.all(
+//   //* set progress to null if course is not bought ->  if (course.purchases.length === 0) {}
+//   courses.map(async (course) => {
+//     if (course.purchases.length === 0) {
+//       return {
+//         ...course,
+//         progress: null,
+//       };
+//     }
+//     //* set progress to perogressPercentage if course is buyed
+//     const perogressPercentage = await getProgress(userId, course.id);
+
+//     return {
+//       ...course,
+//       progress: perogressPercentage,
+//     };
+//   })
+// );

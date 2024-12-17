@@ -6,11 +6,11 @@ import Link from "next/link";
 import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import IconBadge from "@/components/icon-badge";
 
-import ChapterTitleForm from "@/components/forms/course/chapter/chapter-title-form";
-import ChapterDescriptionForm from "@/components/forms/course/chapter/chapter-description-form";
-import ChapterAccessForm from "@/components/forms/course/chapter/chapter-access-form";
-import ChapterVideoForm from "@/components/forms/course/chapter/chapter-video-form";
-import ChapterActions from "@/components/forms/course/chapter/chapter-actions";
+import ChapterTitleForm from "@/components/forms/chapter/chapter-title-form";
+import ChapterDescriptionForm from "@/components/forms/chapter/chapter-description-form";
+import ChapterAccessForm from "@/components/forms/chapter/chapter-access-form";
+import ChapterVideoForm from "@/components/forms/chapter/chapter-video-form";
+import ChapterActions from "@/components/forms/chapter/chapter-actions";
 import Banner from "@/components/banner";
 
 export default async function ChapterIdPage({ params }: { params: { courseId: string; chapterId: string } }) {

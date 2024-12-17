@@ -12,6 +12,7 @@ interface CoursesListProps {
 }
 
 export default function CoursesList({ courses }: CoursesListProps) {
+
   return (
     <div>
       {courses.length === 0 ? (

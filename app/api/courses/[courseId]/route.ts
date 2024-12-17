@@ -12,6 +12,7 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
   try {
     const { userId } = await auth();
     const values = await req.json();
+    console.log("PATCH ~ values:", values);
 
     if (!userId) {
       return NextResponse.json("Unathorized", { status: 401 });

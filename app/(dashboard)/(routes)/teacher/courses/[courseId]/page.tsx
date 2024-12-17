@@ -11,7 +11,7 @@ import ImageForm from "@/components/forms/course/image-form";
 import CategoryForm from "@/components/forms/course/category-form";
 import PriceForm from "@/components/forms/course/price-form";
 import AttachmentForm from "@/components/forms/course/attachment-form";
-import ChapterForm from "@/components/forms/course/chapter/chapter-form";
+import ChapterForm from "@/components/forms/chapter/chapter-form";
 import CourseActions from "@/components/forms/course/course-actions";
 import Banner from "@/components/banner";
 
