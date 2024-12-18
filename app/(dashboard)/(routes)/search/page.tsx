@@ -1,6 +1,7 @@
 import db from "@/data/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 import Categoies from "@/components/categoies";
 import SearchInput from "@/components/search-input";
@@ -33,7 +34,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   return (
     <>
       <div className="px-6 pt-6 md:mb-0 block md:hidden">
-        <SearchInput />
+        <Suspense>
+          <SearchInput />
+        </Suspense>
       </div>
       <div className="p-6 space-y-5">
         <Categoies items={categories} />
