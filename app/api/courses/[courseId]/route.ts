@@ -12,7 +12,6 @@ export const PATCH = async (req: Request, { params }: { params: { courseId: stri
   try {
     const { userId } = await auth();
     const values = await req.json();
-    console.log("PATCH ~ values:", values);
 
     if (!userId) {
       return NextResponse.json("Unathorized", { status: 401 });
@@ -54,7 +53,7 @@ export const DELETE = async (req: Request, { params }: { params: { courseId: str
     if (!courseOwner) {
       return NextResponse.json("Unauthorized", { status: 401 });
     }
-    
+
     //* course with related chapters containing video
     const course = await db.course.findUnique({
       where: {
