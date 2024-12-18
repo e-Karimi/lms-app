@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import CoursesList from "@/components/courses-list";
-import { getDashboardCourses } from "@/actions/get-ashboard-courses";
+import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 import InfoCard from "@/components/info-card";
 import { CheckCircle, Clock } from "lucide-react";
 

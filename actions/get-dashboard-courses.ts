@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import db from "@/data/db";
 import { Category, Course, Chapter } from "@prisma/client";
-import { getProgress } from "./get-progress";
+import { getProgress } from "@/actions/get-progress";
 
 type CourseWithProgressWithCategory = Course & {
   category: Category;
