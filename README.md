@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# <i>lms app</i> 📚
+#### This project serves as a full-stack application,a shop and  admin panel for creating and selling educational courses. It has been crafted using a combination of HTML, Tailwind CSS, Shadcn, TypeScript, Prisma, Zod, and Next.js (version 14 for both backend and frontend). Neon has been considered as a Data base.This application was designed to enhance skills in Next.js, including topics such as dynamic and nested routing, database relationships, and both server and client components. The authentication system has been integrated using Clerk. Some libraries have been used such as Zod, React-Hook-Form, Recharts, React-quilland, uploadthing, Mux, @hello-pangea/dnd, Axios, React-Confetti, React-Hot-Toast and so on.
 
-## Getting Started
 
-First, run the development server:
++ #### a full-stack application 
++ #### Mobile-first
++ #### Technologies used ( html,Tailwind CSS, TypeScript, Next.js)
 
+## 💻  Run the project 
+use this command
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Create course page
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![localhost_3000_teacher_courses_9a70f58a-30e0-42fe-a0ea-39b273886712](https://github.com/user-attachments/assets/da935989-0bdf-4e6d-b368-4b65da13174f)
