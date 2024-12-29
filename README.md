@@ -4,7 +4,6 @@
 
 + #### a full-stack application 
 + #### Mobile-first
-+ #### Technologies used ( html,Tailwind CSS, TypeScript, Next.js)
 
 ## 💻  Run the project 
 use this command
@@ -12,6 +11,20 @@ use this command
 npm run dev
 ```
 
-### Create course page
+## 🛠️ Technologies
+
+- Next.js
+- Prisma
+- Typescript
+- Tailwind CSS
+
+## 🙇 Acknowledgements
+- <a href="https://www.youtube.com/watch?v=Big_aFLmekI&t=1s">Build a Course & LMS Platform: Next 13, React, Stripe, Mux, Prisma, Tailwind, MySQL | Udemy Clone</a>
+
+
+
+## <i>Pictuers</i> 
+
+#### Create course page
 
 ![localhost_3000_teacher_courses_9a70f58a-30e0-42fe-a0ea-39b273886712](https://github.com/user-attachments/assets/da935989-0bdf-4e6d-b368-4b65da13174f)
